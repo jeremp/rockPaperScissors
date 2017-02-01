@@ -131,5 +131,9 @@ public class Game implements Observer {
     public String getWinnerName() {
         return winnerName;
     }
+	
+	public List<Sign> getAllowedSigns(){
+		return ruleEngine.allowedSigns;
+	}
 
 }

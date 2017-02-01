@@ -1,5 +1,6 @@
 package com.jeremp.handsign.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class Sign {
         this.name = name;
     }
 
+	@JsonIgnore
     public List<Sign> getBeats() {
         return beats;
     }
