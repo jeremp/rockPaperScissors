@@ -125,7 +125,7 @@ public class Game implements Observer {
      * @return 
      */
     public List<Player> whoPlayedThat(Sign sign) {
-        return players.stream().filter(p -> p.getPlayed().equals(sign)).collect(Collectors.toList());
+        return players.stream().filter(p -> p.getPlayed().equals(sign) == false).collect(Collectors.toList());
     }
     
     public String getWinnerName() {
@@ -136,4 +136,18 @@ public class Game implements Observer {
 		return ruleEngine.allowedSigns;
 	}
 
+	public boolean isOver() {
+		return over;
+	}
+	
+	public Sign findByName(String name){
+		Optional<Sign> sign = ruleEngine.allowedSigns.stream().filter(s -> s.getName().equalsIgnoreCase(name)).findFirst();	
+		if(sign.isPresent()){
+			return sign.get();
+		}else{
+			return null ;
+		}
+	}
+
+	
 }

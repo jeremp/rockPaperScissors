@@ -14,55 +14,90 @@
       <!-- Latest compiled and minified JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
       <script>
-         var newGame = function(){
-            $.ajax({
-         url: "/game/new"
-         })
-         .done(function( data ) {
-          buildForm(data);
-         });
-         }
-         
-         var buildForm = function(game){
-           console.log(game.players[0].nickname);
-         
-         $.each(game.allowedSigns, function (i, item) {
-          $('.listeSign').append($('<option>', { 
-              value: item.name,
-              text : item.name 
-          }));
-         });
-         }
-		 
-		 var played = function(name){
-		 $( '#'+name ).hide("slow");
-		 }
-         
+        	var newGame = function() {
+				$("#result").hide();
+				$("#myForm").show();
+				$.ajax({
+						url: "/game/new"
+					})
+					.done(function(data) {
+						buildForm(data);
+
+					});
+
+			}
+
+			var buildForm = function(game) {
+				$("#Foo").show();
+				$("#Bar").show();
+				$('.listeSign').empty();
+				$('.listeSign').append($('<option>', {
+					value: "",
+					text: "CHOOSE YOUR SIGN"
+				}));
+				$.each(game.allowedSigns, function(i, item) {
+					$('.listeSign').append($('<option>', {
+						value: item.name,
+						text: item.name
+					}));
+				});
+			}
+
+			var played = function(name) {
+				$("#" + name).hide("slow");
+				var sign = $("#" + name + " option:selected").text();
+				$("#" + name + "IMG").attr("src", "/img/" + sign + ".png");
+				sumbmitSign(name, sign)
+			}
+
+			var sumbmitSign = function(playerName, sign) {
+				$.post("/game/submit?playerName=" + playerName + "&sign=" + sign, function(data) {
+					if (data && data.isOver === true) {
+						$("#myForm").hide();
+						if (data.winnerName && data.winnerName !== "") {
+							$("#resultText").text(data.winnerName + " won !");
+						} else {
+							$("#resultText").text("Tie !");
+						}
+						$("#result").show();
+					}
+				});
+			}
       </script>
    </head>
    <body onload="newGame()">
       <div class="container">
          <div class="starter-template">
-            <h1>Rock Scissors Papers</h1>
-            <p class="lead">It's time to play !</p>
-            <form id="#myForm" class="form-horizontal" action="toto" method="POST">
+            <h1>Rock Scissors Papers</h1>            
+            <form id="myForm" class="form-horizontal">
+			<p class="lead">It's time to play !</p>
                <div class="form-group">
                   <label for="inputFoo" class="col-sm-2 control-label">Foo</label>
                   <div class="col-sm-10">
-				  <select class="form-control listeSign" id="FOO" onchange="played('FOO')"></select>				  
+				  <select class="form-control listeSign" id="Foo" onchange="played('Foo')"></select>				  
                   </div>
                </div>
 			
 			<div class="form-group">
                   <label for="inputFoo" class="col-sm-2 control-label">Bar</label>
                   <div class="col-sm-10">
-                     <select class="form-control listeSign" id="BAR" onchange="played('BAR')"></select>
+                     <select class="form-control listeSign" id="Bar" onchange="played('Bar')"></select>
                   </div>
-               </div>
-			<div class="form-group">
-			<button type="submit" class="btn btn-default">Submit</button></div>
-            </form>
-         </div>
+               </div>			
+         </div>	  
+	  
+	  <div id="result">
+	       <p class="lead">Game Over</p>
+		   <p>
+		      <img id="FooIMG" src=""/>
+	          <img id="BarIMG" src=""/>
+		   </p>
+		   <p id="resultText"></p>
+		   <a href="javascript:newGame();">play again</a>
+	  </div>
+	  
+	  
+	  <a href="https://icons8.com">Icon pack by Icons8</a>
       </div>
       <!-- /.container -->
    </body>

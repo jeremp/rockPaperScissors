@@ -41,6 +41,20 @@ public class Sign {
         this.beats = beats;
     }
 
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Sign){
+			return ((Sign)obj).getName().equalsIgnoreCase(this.name);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+	
+
     @Override
     public String toString() {
         return "Sign{" + "name=" + name + "}'";

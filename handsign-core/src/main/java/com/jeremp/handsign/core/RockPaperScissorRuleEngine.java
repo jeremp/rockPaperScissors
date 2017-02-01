@@ -1,6 +1,7 @@
 package com.jeremp.handsign.core;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * The famous Rock Paper Scissors
@@ -33,8 +34,6 @@ public class RockPaperScissorRuleEngine extends RuleEngine {
             }
             return null;
         }
-    }
-    
-   
+    }	
 
 }

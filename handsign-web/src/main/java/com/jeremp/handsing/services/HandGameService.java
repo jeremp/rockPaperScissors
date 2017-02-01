@@ -1,6 +1,7 @@
 package com.jeremp.handsing.services;
 
 import com.jeremp.handsign.core.Game;
+import com.jeremp.handsign.core.Sign;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,11 @@ public class HandGameService {
 	
 	public Game getGame() {
 		return game;
+	}
+	
+	public Game submit(String playerName, String sign){
+		game.getPlayerByName(playerName).play( game.findByName(sign) );
+		return game ;
 	}
 
 }
