@@ -11,17 +11,7 @@ You can implement your own version of this game by extending the *RuleEngine* cl
 
 ## How to play ?
 
-### Requirements 
-
-* Java 8 (Runtime)
-* Grap the **rps-web-0.0.1-SNAPSHOT.jar** executable 
-
-### How to run it ?
-
-1. Run `java -jar rps-web-0.0.1-SNAPSHOT.jar`
-2. Open your favorite browser on http://localhost:8080  
-
-## I want to build it from sources
+You have to build it from sources.
 
 ### Requirements 
 
@@ -39,7 +29,11 @@ You can implement your own version of this game by extending the *RuleEngine* cl
 . change directory to `rockPaperScissors\handsign-web`
 . `mvn install` 
 . the executable jar is generated into the *target* dir
-4. Run `java -jar rps-web-0.0.1-SNAPSHOT.jar`
-5. Open your favorite browser on http://localhost:8080  
 
+### How to run it ?
 
+1. Run `java -jar rps-web-0.0.1-SNAPSHOT.jar`
+2. Open your favorite browser on http://localhost:8080  
+
+> The server default port is *8080* but you can change it with the `-Dserver.port` option
+> Example : `java -jar -Dserver.port=9000 rps-web-0.0.1-SNAPSHOT.jar`
