@@ -22,13 +22,13 @@ You have to build it from sources.
 
 1. Clone this repository
 2. Build the **handsign-core** project
-. `cd rockPaperScissors/handsign-core`
-. `mvn install` 
-. The test coverage report is generated in *target/site/jacoco*
+  * `cd rockPaperScissors/handsign-core`
+  * `mvn install` 
+  * The test coverage report is generated in *target/site/jacoco*
 3. build the **handsign-web** project
-. change directory to `rockPaperScissors\handsign-web`
-. `mvn install` 
-. the executable jar is generated into the *target* dir
+  * change directory to `rockPaperScissors\handsign-web`
+  * `mvn install` 
+  * the executable jar is generated into the *target* dir
 
 ### How to run it ?
 
