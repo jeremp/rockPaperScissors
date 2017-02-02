@@ -10,6 +10,7 @@ import java.util.Optional;
  */
 public class RockPaperScissorRuleEngine extends RuleEngine {
 
+	/* This game involves 3 Signs */
     public static final Sign ROCK = new Sign("ROCK");
     public static final Sign PAPER = new Sign("PAPER");
     public static final Sign SCISSORS = new Sign("SCISSORS");

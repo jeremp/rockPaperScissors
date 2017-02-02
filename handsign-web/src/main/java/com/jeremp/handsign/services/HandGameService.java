@@ -1,4 +1,4 @@
-package com.jeremp.handsing.services;
+package com.jeremp.handsign.services;
 
 import com.jeremp.handsign.core.Game;
 import com.jeremp.handsign.core.Sign;

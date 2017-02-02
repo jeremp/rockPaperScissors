@@ -1,11 +1,11 @@
-package com.jeremp.handsing.web;
+package com.jeremp.handsign.web;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jeremp.handsign.core.Game;
 import com.jeremp.handsign.core.Sign;
-import com.jeremp.handsing.services.HandGameService;
+import com.jeremp.handsign.services.HandGameService;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
