@@ -29,6 +29,7 @@ public class GameTest {
 		Assert.assertFalse(game.isOver());
 		game.getPlayerByName("Bar").play(RockPaperScissorRuleEngine.PAPER);
 		Assert.assertNotNull(game.getWinnerName());
+		Assert.assertEquals(game.getWinnerName(), "Foo");
 		Assert.assertTrue(game.isOver());
 	}
 
@@ -51,5 +52,27 @@ public class GameTest {
 		Assert.assertFalse(game.isOver());
 		game.getPlayerByName("Bar").play(RockPaperScissorRuleEngine.SCISSORS);
 	}
+	
+	@Test
+	public void testComputerGame(){
+		Game game = new Game(new RockPaperScissorRuleEngine(), new ComputerPlayer("D2R2"), new ComputerPlayer("ED-209"));
+		Assert.assertTrue(game.isOver());
+	}
+	
+	@Test
+	public void testHumanVsComputerGame(){
+		Game game = new Game(new RockPaperScissorRuleEngine(), new Player("Jeremy"), new ComputerPlayer("ED-209"));
+		Assert.assertFalse(game.isOver());
+		Player playerByName = game.getPlayerByName("Jeremy");
+		game.getPlayerByName("Jeremy").play(RockPaperScissorRuleEngine.SCISSORS);
+		Assert.assertTrue(game.isOver());
+	}
+	
+	@Test
+	public void testFindSignByName(){
+		Game game = new Game(new RockPaperScissorRuleEngine());
+		Assert.assertEquals(RockPaperScissorRuleEngine.SCISSORS, game.findByName(RockPaperScissorRuleEngine.SCISSORS.getName()));
+	}
+
 
 }

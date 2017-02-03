@@ -1,6 +1,7 @@
 
 package com.jeremp.handsign.core;
 
+import java.util.Objects;
 import java.util.Observable;
 
 /**
@@ -49,5 +50,32 @@ public class Player extends Observable {
     public void setPlayed(Sign played) {
         this.played = played;
     }
+
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 67 * hash + Objects.hashCode(this.nickname);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Player other = (Player) obj;
+		if (!Objects.equals(this.nickname, other.nickname)) {
+			return false;
+		}
+		return true;
+	}
+	
+	
 
 }

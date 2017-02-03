@@ -24,17 +24,17 @@ public class Game implements Observer {
     /**
      * The first Player
      */
-    private final Player playerFoo = new Player("Foo");
+    private Player playerFoo = new Player("Foo");
     
     /**
      * The second Player
      */
-    private final Player playerBar = new Player("Bar");
+    private Player playerBar = new Player("Bar");
     
     /**
      * A List to retrieve them directly
      */
-    private final List<Player> players = Arrays.asList(new Player[]{playerFoo, playerBar});
+    private List<Player> players = Arrays.asList(new Player[]{playerFoo, playerBar});
 
     /**
      * is this game over ?
@@ -61,11 +61,25 @@ public class Game implements Observer {
     public Game(RuleEngine engine) {
         initGame(engine);
     }
+	
+	public Game(RuleEngine engine, Player foo, Player bar) {
+		this.playerBar = bar ;
+		this.playerFoo = foo ;
+		players = Arrays.asList(new Player[]{playerFoo, playerBar});
+        initGame(engine);
+    }
 
     private void initGame(RuleEngine engine) {
         playerFoo.addObserver(this);
         playerBar.addObserver(this);
         ruleEngine = engine;
+		// computer plays without waiting anything
+		if(playerFoo instanceof ComputerPlayer){
+			((ComputerPlayer)playerFoo).play(engine.allowedSigns);
+		}
+		if(playerBar instanceof ComputerPlayer){
+			((ComputerPlayer)playerBar).play(engine.allowedSigns);
+		}
     }
 
     public List<Player> getPlayers() {
@@ -116,8 +130,13 @@ public class Game implements Observer {
      * @return 
      */
     public Player getPlayerByName(String nickName) {
-        return players.stream().filter(p -> p.getNickname().equals(nickName) == false).findFirst().get();
-    }
+		for(Player p : players){
+			if(nickName.equalsIgnoreCase(p.getNickname())){
+				return p ;
+			}
+		}
+		return null ;
+	}
 
     /**
      * Find players who played a particular sign
@@ -125,7 +144,13 @@ public class Game implements Observer {
      * @return 
      */
     public List<Player> whoPlayedThat(Sign sign) {
-        return players.stream().filter(p -> p.getPlayed().equals(sign) == false).collect(Collectors.toList());
+        List<Player> pList = new ArrayList<>();
+		for(Player p : players){
+			if(sign.equals(p.getPlayed())){
+				pList.add(p);
+			}
+		}
+		return pList ;
     }
     
     public String getWinnerName() {
